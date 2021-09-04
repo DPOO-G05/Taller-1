@@ -23,23 +23,9 @@ public class Pedido {
 	
 	
 	// Métodos
-
-	@Override
-	public int getPrecio() {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	@Override
-	public String getNombre() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
 	private String generarTextoFactura() {
 		// TODO Auto-generated method stub
-		return null;
+		return "";
 	}
 	
 	public void agregarProducto(Producto nuevoItem) {
@@ -49,23 +35,35 @@ public class Pedido {
 
 	private int getPrecioNetoPedido() {
 		// TODO: IMPLEMENTAR
+		return 0;
 	}
 	
 	
 	private int getPrecioTotalPedido() {
 		// TODO: IMPLEMENTAR
+		return 0;
 	}
 	
 	
 	private int getPrecioIVAPedido() {
 		// TODO: IMPLEMENTAR
+		return 0;
 	}
 	
 	private Combo buscarCombo(String nombre) {
+		//TODO: IMPLEMENTAR
 		return new Combo("",0.5);
 	}
 	
+	private ProductoMenu buscarProductoMenu(String nombre) {
+		//TODO: IMPLEMENTAR
+		return null;
+	}
 	
+	private Ingrediente buscarIngrediente(String ingrediente) {
+		//TODO: IMPLEMENTAR
+		return null;
+	}
 	
 	
 }

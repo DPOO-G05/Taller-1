@@ -12,6 +12,17 @@ import uniandes.dpoo.procesamiento.LoaderInformacionArchivos;;
 
 public class Aplicacion {
 
+	
+	public void mostrarMenu() {
+		System.out.printf("Menu");
+	}
+	
+
+	public void ejecutarOpcion(int opcionSeleccionada) {
+		// TODO: IMPLEMENTAR
+	}
+	
+	
 	/**
 	 * Leer el archivo de Productos Menu y obtener su informacion en una lista de objetos ProductoMenu
 	 * @param rutaArchivo
