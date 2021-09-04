@@ -10,7 +10,7 @@ import uniandes.dpoo.modelo.Combo;
 import uniandes.dpoo.modelo.ProductoMenu;
 import uniandes.dpoo.procesamiento.LoaderInformacionArchivos;;
 
-public class ConsolaHamburguesas {
+public class Aplicacion {
 
 	/**
 	 * Leer el archivo de Productos Menu y obtener su informacion en una lista de objetos ProductoMenu
@@ -23,11 +23,11 @@ public class ConsolaHamburguesas {
 		try
 		{
 			productosMenu = LoaderInformacionArchivos.leerInfoArchivoProductosMenu(rutaArchivo);
-			System.out.println("OK Se cargó el archivo " + rutaArchivo + " con información de los Productos Menu.");
+			System.out.println("OK Se cargï¿½ el archivo " + rutaArchivo + " con informaciï¿½n de los Productos Menu.");
 		}
 		catch (FileNotFoundException e)
 		{
-			System.out.println("ERROR: el archivo " + rutaArchivo + " no se encontró.");
+			System.out.println("ERROR: el archivo " + rutaArchivo + " no se encontrï¿½.");
 			System.out.println(e.getMessage());
 		}
 		catch (IOException e)
@@ -51,11 +51,11 @@ public class ConsolaHamburguesas {
 		try
 		{
 			combos = LoaderInformacionArchivos.leerInfoArchivoCombos(rutaArchivo, productosMenu);
-			System.out.println("OK Se cargó el archivo " + rutaArchivo + " con información de los Combos.");
+			System.out.println("OK Se cargï¿½ el archivo " + rutaArchivo + " con informaciï¿½n de los Combos.");
 		}
 		catch (FileNotFoundException e)
 		{
-			System.out.println("ERROR: el archivo " + rutaArchivo + " no se encontró.");
+			System.out.println("ERROR: el archivo " + rutaArchivo + " no se encontrï¿½.");
 			System.out.println(e.getMessage());
 		}
 		catch (IOException e)
@@ -92,9 +92,9 @@ public class ConsolaHamburguesas {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		System.out.println("Inicio de ejecución de la aplicación");
+		System.out.println("Inicio de ejecuciï¿½n de la aplicaciï¿½n");
 		
-		ConsolaHamburguesas consola = new ConsolaHamburguesas();
+		Aplicacion consola = new Aplicacion();
 		
 		ArrayList<ProductoMenu> productosMenu = consola.ejecutarCargarProductosMenu("./data/menu.txt");  // el parametro es la ruta del archivo menu.txt dentro del proyecto Eclipse
 		for (ProductoMenu prodMenu : productosMenu)

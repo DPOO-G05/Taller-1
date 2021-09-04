@@ -1,11 +1,11 @@
 package uniandes.dpoo.modelo;
 
-public class ProductoMenu {
+
+public class ProductoMenu implements Producto {
 	private String nombre;
 	private int precioBase;
 	
-	public ProductoMenu(String nombreP, int precioP)
-	{
+	public ProductoMenu(String nombreP, int precioP) {
 		this.nombre = nombreP;
 		this.precioBase = precioP;
 	}
@@ -17,5 +17,23 @@ public class ProductoMenu {
 	public String toString()
 	{
 		return this.nombre + "-" + this.precioBase;
+	}
+
+	@Override
+	public int getPrecio() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public String getNombre() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String generarTextoFactura() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }
