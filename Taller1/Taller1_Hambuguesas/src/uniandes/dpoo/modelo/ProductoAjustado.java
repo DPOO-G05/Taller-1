@@ -88,7 +88,6 @@ public class ProductoAjustado implements Producto {
 			else if (array[0].equals((String) "-")) {
 
 				ingrediente = ingredientes.get(Integer.parseInt(array[1]) - 1);
-				precio -= ingrediente.getCostoAdicional();
 				this.eliminados.add(ingrediente);
 			}
 			
