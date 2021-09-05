@@ -1,83 +1,65 @@
 package uniandes.dpoo.consola;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 import uniandes.dpoo.modelo.Combo;
+import uniandes.dpoo.modelo.Restaurante;
 import uniandes.dpoo.modelo.ProductoMenu;
 import uniandes.dpoo.procesamiento.LoaderInformacionArchivos;;
 
+
+
 public class Aplicacion {
 
+	private Restaurante restaurante;
+
+	public Aplicacion(Restaurante restaurante) {
+		this.restaurante = restaurante;
+	}
 	
 	public void mostrarMenu() {
-		System.out.printf("Menu");
+		System.out.println("Menu:");
+		System.out.println("1: Cargar Informacion");
+		System.out.println("2: Iniciar Pedido");
+
+		int opcionSeleccionada = Integer.parseInt(input("Ingrese la opción deseada"));
+		ejecutarOpcion(opcionSeleccionada);
+
 	}
 	
 
 	public void ejecutarOpcion(int opcionSeleccionada) {
 		// TODO: IMPLEMENTAR
+	
+		int o = opcionSeleccionada;
+		switch (o) {
+			case 1:
+				String fileIngredientes = "./data/ingredientes.txt";
+				String fileMenu = "./data/menu.txt";
+				String fileCombos = "./data/ingredientes.txt";
+				this.restaurante.cargarInformacionRestaurante(fileIngredientes,fileMenu , fileCombos);
+				break;
+			case 2:
+				String nombreCliente = input("Ingrese su nombre");
+				String direccion = input("Ingrese su dirección");
+				this.restaurante.iniciarPedido(nombreCliente.trim().toLowerCase(), direccion.trim().toLowerCase());
+				break;
+		}
 	}
 	
-	
-	/**
-	 * Leer el archivo de Productos Menu y obtener su informacion en una lista de objetos ProductoMenu
-	 * @param rutaArchivo
-	 * @return Lista de objetos ProductoMenu
-	 */
-	private ArrayList<ProductoMenu> ejecutarCargarProductosMenu(String rutaArchivo)
-	{
-		ArrayList<ProductoMenu> productosMenu = new ArrayList<ProductoMenu>();
-		try
-		{
-			productosMenu = LoaderInformacionArchivos.leerInfoArchivoProductosMenu(rutaArchivo);
-			System.out.println("OK Se carg� el archivo " + rutaArchivo + " con informaci�n de los Productos Menu.");
-		}
-		catch (FileNotFoundException e)
-		{
-			System.out.println("ERROR: el archivo " + rutaArchivo + " no se encontr�.");
-			System.out.println(e.getMessage());
-		}
-		catch (IOException e)
-		{
-			System.out.println("ERROR: hubo un problema leyendo el archivo " + rutaArchivo);
-			System.out.println(e.getMessage());
-		}
-
-		return productosMenu;
-	}
-
 	/**
 	 * Leer el archivo de combos y obtener su informacion en una lista de objetos Combo
 	 * @param rutaArchivo
 	 * @param productosMenu Lista de productos menu donde aparecen todos los posibles productos de un combo
 	 * @return Lista de objetos Combo
 	 */
-	private ArrayList<Combo> ejecutarCargarCombos(String rutaArchivo, ArrayList<ProductoMenu> productosMenu)
-	{
-		ArrayList<Combo> combos = new ArrayList<Combo>();
-		try
-		{
-			combos = LoaderInformacionArchivos.leerInfoArchivoCombos(rutaArchivo, productosMenu);
-			System.out.println("OK Se carg� el archivo " + rutaArchivo + " con informaci�n de los Combos.");
-		}
-		catch (FileNotFoundException e)
-		{
-			System.out.println("ERROR: el archivo " + rutaArchivo + " no se encontr�.");
-			System.out.println(e.getMessage());
-		}
-		catch (IOException e)
-		{
-			System.out.println("ERROR: hubo un problema leyendo el archivo " + rutaArchivo);
-			System.out.println(e.getMessage());
-		}
 
-		return combos;
-	}
-	
 	/**
 	 * Este metodo sirve para imprimir un mensaje en la consola pidiendole
 	 * informacion al usuario y luego leer lo que escriba el usuario.
@@ -105,16 +87,11 @@ public class Aplicacion {
 		// TODO Auto-generated method stub
 		System.out.println("Inicio de ejecuci�n de la aplicaci�n");
 		
-		Aplicacion consola = new Aplicacion();
+		Restaurante restaurante = new Restaurante();
+		Aplicacion app = new Aplicacion(restaurante);
+		app.mostrarMenu();
+
 		
-		ArrayList<ProductoMenu> productosMenu = consola.ejecutarCargarProductosMenu("./data/menu.txt");  // el parametro es la ruta del archivo menu.txt dentro del proyecto Eclipse
-		for (ProductoMenu prodMenu : productosMenu)
-			System.out.println(prodMenu);
-
-		ArrayList<Combo> combos = consola.ejecutarCargarCombos("./data/combos.txt", productosMenu);  // parametros: ruta del archivo combos.txt y lista de productos menu disponibles
-		for (Combo combo : combos)
-			System.out.println(combo);
-
-	}
+		}
 
 }

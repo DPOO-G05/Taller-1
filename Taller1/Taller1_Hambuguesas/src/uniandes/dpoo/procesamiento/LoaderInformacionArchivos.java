@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 import uniandes.dpoo.modelo.Combo;
+import uniandes.dpoo.modelo.Ingrediente;
 import uniandes.dpoo.modelo.ProductoMenu;
 
 public class LoaderInformacionArchivos {
@@ -38,6 +39,29 @@ public class LoaderInformacionArchivos {
 		br.close();
 		return productosMenu;
 	}
+	
+	
+	public static ArrayList<Ingrediente> leerInfoArchivoIngredientes(String rutaIngredientes) throws FileNotFoundException, IOException
+	{
+		ArrayList<Ingrediente> ingredientes = new ArrayList<>();
+		
+		BufferedReader br = new BufferedReader(new FileReader(rutaIngredientes));
+		String linea = br.readLine();   // Leer la linea con el primer ProductoMenu en el archivo   
+		// Un ProductoMenu tiene la forma: nombre;precioBase
+		while (linea != null) // Cuando se llegue al final del archivo, linea tendra el valor null
+		{
+			// Separar los valores que estan en la linea por el caracter ';'
+			String[] partes = linea.split(";");
+			Ingrediente nuevoIngrediente = new Ingrediente(partes[0], Integer.parseInt(partes[1]));   // Creacion de un objeto ProductoMenu con su nombre y precio base
+			ingredientes.add(nuevoIngrediente);
+			linea = br.readLine(); // leer la proxima linea en el archivo con un nuevo ProductoMenu 
+		}
+		br.close();
+		
+		return ingredientes;
+	}
+	
+	
 
 	/**
 	 * Lectura del archivo de Combos
@@ -61,10 +85,23 @@ public class LoaderInformacionArchivos {
 			double porcentaje = Double.parseDouble( partes[1].substring(0, partes[1].length()-1)); // eliminar el caracter '%' y convertir el porcentaje a un valor numerico double
 
 			Combo nuevoCombo = new Combo(partes[0], porcentaje);   // creacion de un objeto Combo con su nombre y porcentaje de descuento
-
+			
+			//Agregar todos los productos al combo
 			for (int i = 2; i < partes.length; i++)
 			{
-				nuevoCombo.agregarProducto(partes[i]);    // SIMPLIFICACION: se agrega el nombre de un "productoMenu" a un combo
+				String nombre1 = partes[i].trim().toLowerCase();
+
+				//Busqueda para encontrar el producto.
+
+				for(ProductoMenu producto: productosMenu) {
+					String nombre2 = producto.getNombre().trim().toLowerCase();
+
+					if (nombre1.equals(nombre2)) {
+					
+						nuevoCombo.agregarProducto(producto);
+					}
+					
+				}
 				                                          // MEJORA: Buscar y agregar el ProductoMenu con el nombre en la lista productosMenu (parametro)
 			}
 
