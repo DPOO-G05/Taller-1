@@ -78,8 +78,8 @@ public class Restaurante {
 		pedido.setIdPedido(id);
 	}
 
-	public void cerrarYGuardarPedido() {
-		// TODO: IMPLEMENTAR
+	public String cerrarYGuardarPedido() {
+		return this.pedidoEnCurso.guardarFactura();
 	}
 	
 	public void cargarInformacionRestaurante(String rutaIngredientes, String rutaMenu, String rutaCombos) {

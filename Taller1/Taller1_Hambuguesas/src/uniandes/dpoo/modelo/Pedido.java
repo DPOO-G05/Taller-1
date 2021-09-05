@@ -23,9 +23,28 @@ public class Pedido {
 	
 	
 	// Métodos
+	
+	public String guardarFactura() {
+		return generarTextoFactura();
+	}
+	
+	
+	
 	private String generarTextoFactura() {
-		// TODO Auto-generated method stub
-		return "";
+		String header = "**************";
+		int IVA = getPrecioIVAPedido();
+		int neto = getPrecioNetoPedido();
+		int total = getPrecioTotalPedido();
+		
+		String cuerpo = "";
+		
+		for (Producto producto: itemsPedido) {
+			cuerpo += producto.generarTextoFactura();
+		}
+		
+		
+		String factura = String.format("%s\n\t%s\n%s%s\nTOTAL: %d\tNETO: %d\tIVA: %d", header, "FACTURA", cuerpo, header,total,neto,IVA); 
+		return factura; 
 	}
 	
 	public static int getNumeroPedidos() {
@@ -66,8 +85,6 @@ public class Pedido {
 
 	public void agregarProducto(Producto nuevoItem ) {
 		this.itemsPedido.add(nuevoItem);
-		//TODO: 
-		//Chekear de que tipo es el producto.
 	}
 	
 	public void agregarProducto(Producto nuevoItem, ArrayList<String> modificaciones, Restaurante restaurante) {
@@ -78,36 +95,27 @@ public class Pedido {
 	}
 
 	private int getPrecioNetoPedido() {
-		// TODO: IMPLEMENTAR
-		return 0;
+		int total = 0;
+
+		for (Producto producto: this.itemsPedido) {
+			total += producto.getPrecio();
+		}
+		
+		
+		return total;
 	}
 	
 	
 	private int getPrecioTotalPedido() {
-		// TODO: IMPLEMENTAR
-		return 0;
+		return getPrecioIVAPedido() + getPrecioNetoPedido();
 	}
 	
 	
 	private int getPrecioIVAPedido() {
-		// TODO: IMPLEMENTAR
-		return 0;
+		return (int) (getPrecioNetoPedido() * 0.19);
 	}
+
 	
-	private Combo buscarCombo(String nombre) {
-		//TODO: IMPLEMENTAR
-		return new Combo("",0.5);
-	}
-	
-	private ProductoMenu buscarProductoMenu(String nombre) {
-		//TODO: IMPLEMENTAR
-		return null;
-	}
-	
-	private Ingrediente buscarIngrediente(String ingrediente) {
-		//TODO: IMPLEMENTAR
-		return null;
-	}
 	
 	
 }

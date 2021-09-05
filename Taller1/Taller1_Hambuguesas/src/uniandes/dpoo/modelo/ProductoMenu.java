@@ -21,19 +21,18 @@ public class ProductoMenu implements Producto {
 
 	@Override
 	public int getPrecio() {
-		// TODO Auto-generated method stub
 		return this.precioBase;
 	}
 
 	@Override
 	public String getNombre() {
-		// TODO Auto-generated method stub
 		return this.nombre;
 	}
 
 	@Override
 	public String generarTextoFactura() {
-		// TODO Auto-generated method stub
-		return null;
+		String base = getNombre();
+		String texto = "Producto: " + base + "\n\t\tPrecio: " + String.valueOf(this.precioBase) + "\n\t\tIVA: " + String.format("%.2f\n", this.precioBase* 0.19 );
+		return texto;
 	}
 }

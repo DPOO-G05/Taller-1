@@ -30,7 +30,7 @@ public class Aplicacion {
 	public void mostrarMenuPrincipal() {
 		boolean continuar = true;
 		while (continuar) {
-			System.out.println("Menu:");
+			System.out.println("\nMenu:");
 			System.out.println("1: Cargar Informacion");
 			System.out.println("2: Iniciar Pedido");
 			System.out.println("3: Agregar Producto");
@@ -134,7 +134,9 @@ public class Aplicacion {
 	}
 	
 	
-	
+	private void cerrarYFacturar() {
+		System.out.println(this.restaurante.cerrarYGuardarPedido());
+	}
 	
 	
 	public void ejecutarOpcion(int opcionSeleccionada) {
@@ -156,7 +158,6 @@ public class Aplicacion {
 				break;
 
 			case 3:
-				// Generar el texto del menú
 				mostrarMenuBase();
 				mostrarEstadoPedido();
 				break;
@@ -166,6 +167,9 @@ public class Aplicacion {
 				break;
 			case 5:
 				mostrarEstadoPedido();
+				break;
+			case 6:
+				cerrarYFacturar();
 				break;
 			case 7:
 				System.out.println("Gracias por tu compra!");

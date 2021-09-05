@@ -74,22 +74,37 @@ public class Combo implements Producto {
 	{
 		return this.nombreCombo + "-" + this.descuento + "-" + this.itemsCombo;
 	}
-
+	
 	@Override
 	public int getPrecio() {
-		// TODO Auto-generated method stub
-		return 0;
+		calcularPrecio();
+		return this.precio;
 	}
 
 	@Override
 	public String getNombre() {
-		// TODO Auto-generated method stub
 		return toString();
 	}
 
 	@Override
 	public String generarTextoFactura() {
-		// TODO Auto-generated method stub
-		return null;
+		String base = getNombre();
+		String texto = "Producto: " + base + "\n\t\tPrecio: " + String.valueOf(this.precio) + "\n\t\tIVA: " + String.format("%.2f\n", this.precio * 0.19 );
+		return texto;
 	}
+	
+	private void calcularPrecio() {
+		ArrayList<ProductoMenu> productos = this.itemsCombo;
+		double descuento = this.descuento;
+		
+		int suma = 0;
+		
+		for (ProductoMenu producto: productos) {
+
+			suma += producto.getPrecio();
+		}
+		
+		this.precio = (int) (suma * (1-descuento/100));
+	}
+
 }

@@ -5,12 +5,14 @@ import java.util.ArrayList;
 public class ProductoAjustado implements Producto {
 
 	private ProductoMenu base;
+	private int precio;
 	private ArrayList<Ingrediente> agregados;
 	private ArrayList<Ingrediente> eliminados;
 
 	
 	public ProductoAjustado(ProductoMenu base) {
 		this.base = base;
+		this.precio = base.getPrecio();
 		this.agregados = new ArrayList<Ingrediente>();
 		this.eliminados = new ArrayList<Ingrediente>();
 	}
@@ -38,8 +40,7 @@ public class ProductoAjustado implements Producto {
 
 	@Override
 	public int getPrecio() {
-		// TODO Auto-generated method stub
-		return 0;
+		return this.precio;
 	}
 
 
@@ -63,7 +64,10 @@ public class ProductoAjustado implements Producto {
 	@Override
 	public String generarTextoFactura() {
 		// TODO Auto-generated method stub
-		return null;
+		String base = getNombre();
+		String texto = "Producto: " + base + "\n\t\tPrecio: " + String.valueOf(this.precio) + "\n\t\tIVA: " + String.format("%.2f\n", this.precio* 0.19 );
+		return texto;
+
 	}
 	
 	
@@ -76,12 +80,15 @@ public class ProductoAjustado implements Producto {
 			if (array[0].equals((String) "+")) {
 				
 				ingrediente = ingredientes.get(Integer.parseInt(array[1]) - 1);
+				precio += ingrediente.getCostoAdicional();
 				this.agregados.add(ingrediente);
+
 				
 			}
 			else if (array[0].equals((String) "-")) {
 
 				ingrediente = ingredientes.get(Integer.parseInt(array[1]) - 1);
+				precio -= ingrediente.getCostoAdicional();
 				this.eliminados.add(ingrediente);
 			}
 			
