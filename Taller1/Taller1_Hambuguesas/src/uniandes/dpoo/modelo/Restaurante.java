@@ -1,6 +1,7 @@
 package uniandes.dpoo.modelo;
 
 import java.io.File;
+import java.lang.Math;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -72,6 +73,9 @@ public class Restaurante {
 	public void iniciarPedido(String nombreCliente, String direccionCliente) {
 		// TODO: IMPLEMENTAR
 		Pedido pedido = new Pedido(nombreCliente, direccionCliente);
+		this.pedidoEnCurso = pedido;
+		int id = (int) (Math.random() * 1_000_000);
+		pedido.setIdPedido(id);
 	}
 
 	public void cerrarYGuardarPedido() {
@@ -80,7 +84,6 @@ public class Restaurante {
 	
 	public void cargarInformacionRestaurante(String rutaIngredientes, String rutaMenu, String rutaCombos) {
 		
-		// TODO: IMPLEMENTAR
 	
 		cargarMenu(rutaMenu);
 		cargarIngredientes(rutaIngredientes);
@@ -145,7 +148,7 @@ public class Restaurante {
 				System.out.println("OK Se carg� el archivo " + rutaMenu + " con informaci�n de los Productos Menu.");
 				this.menuBase = productosMenu;
 				for (ProductoMenu producto: this.menuBase) {
-					System.out.printf("%s", producto);
+					System.out.printf("%s", producto.getNombre());
 				}
 			}
 			catch (FileNotFoundException e)

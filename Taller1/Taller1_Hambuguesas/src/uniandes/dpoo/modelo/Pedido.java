@@ -14,7 +14,7 @@ public class Pedido {
 	public Pedido (String nombreCliente, String direccionCliente ) {
 		this.nombreCliente = nombreCliente;
 		this.direccionCliente = direccionCliente;
-
+		this.itemsPedido = new ArrayList<Producto>();
 		numeroPedidos++;
 	}
 	
@@ -28,9 +28,53 @@ public class Pedido {
 		return "";
 	}
 	
-	public void agregarProducto(Producto nuevoItem) {
-		// TODO: Revisar 
+	public static int getNumeroPedidos() {
+		return numeroPedidos;
+	}
+
+	public int getIdPedido() {
+		return idPedido;
+	}
+
+	public void setIdPedido(int idPedido) {
+		this.idPedido = idPedido;
+	}
+
+	public String getNombreCliente() {
+		return nombreCliente;
+	}
+
+	public void setNombreCliente(String nombreCliente) {
+		this.nombreCliente = nombreCliente;
+	}
+
+	public String getDireccionCliente() {
+		return direccionCliente;
+	}
+
+	public void setDireccionCliente(String direccionCliente) {
+		this.direccionCliente = direccionCliente;
+	}
+
+	public ArrayList<Producto> getItemsPedido() {
+		return itemsPedido;
+	}
+
+	public void setItemsPedido(ArrayList<Producto> itemsPedido) {
+		this.itemsPedido = itemsPedido;
+	}
+
+	public void agregarProducto(Producto nuevoItem ) {
 		this.itemsPedido.add(nuevoItem);
+		//TODO: 
+		//Chekear de que tipo es el producto.
+	}
+	
+	public void agregarProducto(Producto nuevoItem, ArrayList<String> modificaciones, Restaurante restaurante) {
+		ProductoMenu base = (ProductoMenu) nuevoItem;
+		ProductoAjustado ajustado = new ProductoAjustado(base);
+		ajustado.modificarProducto(modificaciones, restaurante);
+		this.itemsPedido.add(ajustado);
 	}
 
 	private int getPrecioNetoPedido() {
