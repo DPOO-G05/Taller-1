@@ -2,7 +2,7 @@ package uniandes.dpoo.modelo;
 
 import java.util.ArrayList;
 
-public class Combo {
+public class Combo implements Producto {
 	private String nombreCombo;
 	private int precio;
 	private double descuento;
@@ -73,5 +73,23 @@ public class Combo {
 	public String toString()
 	{
 		return this.nombreCombo + "-" + this.descuento + "-" + this.itemsCombo;
+	}
+
+	@Override
+	public int getPrecio() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public String getNombre() {
+		// TODO Auto-generated method stub
+		return toString();
+	}
+
+	@Override
+	public String generarTextoFactura() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

@@ -118,7 +118,18 @@ public class Aplicacion {
 	
 	
 	private void mostrarMenuCombos() {
+
+		ArrayList<Combo> combos = this.restaurante.getCombos();
+
+		System.out.println("Digite el número del combo que desea agregar:");
 		
+		for(int i = 0; i < combos.size(); i++) {
+			System.out.printf("%d\t%s\n", i + 1, combos.get(i));
+		}
+		
+		int posicion = Integer.parseInt(input("Numero")) - 1;
+		
+		this.restaurante.getPedidoEnCurso().agregarProducto((Producto) combos.get(posicion));
 		
 	}
 	
@@ -134,7 +145,7 @@ public class Aplicacion {
 			case 1:
 				String fileIngredientes = "./data/ingredientes.txt";
 				String fileMenu = "./data/menu.txt";
-				String fileCombos = "./data/ingredientes.txt";
+				String fileCombos = "./data/combos.txt";
 				this.restaurante.cargarInformacionRestaurante(fileIngredientes,fileMenu , fileCombos);
 				break;
 
