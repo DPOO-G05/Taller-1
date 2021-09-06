@@ -3,7 +3,9 @@ package uniandes.dpoo.modelo;
 import java.io.File;
 import java.lang.Math;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 
 import uniandes.dpoo.procesamiento.LoaderInformacionArchivos;
@@ -17,7 +19,7 @@ public class Restaurante {
 	private ArrayList<Combo> combos;
 	
 	public Restaurante () {
-		
+		this.pedidos = new ArrayList<>();
 	}
 
 	//Getters y Setters
@@ -71,14 +73,16 @@ public class Restaurante {
 	
 	
 	public void iniciarPedido(String nombreCliente, String direccionCliente) {
-		// TODO: IMPLEMENTAR
 		Pedido pedido = new Pedido(nombreCliente, direccionCliente);
 		this.pedidoEnCurso = pedido;
 		int id = (int) (Math.random() * 1_000_000);
 		pedido.setIdPedido(id);
 	}
 
+	
+	
 	public String cerrarYGuardarPedido() {
+		this.pedidos.add(this.pedidoEnCurso);
 		return this.pedidoEnCurso.guardarFactura();
 	}
 	
@@ -93,9 +97,15 @@ public class Restaurante {
 	
 	
 	public Pedido consultarPedido(int id) {
+		Pedido respuesta = null;
+		for (Pedido pedido: this.pedidos) {
+			if (pedido.getIdPedido() == id){
+				respuesta = pedido;
+			}
+		}
 		
-		// TODO: IMPLEMENTAR
-		return new Pedido("","");
+		return respuesta;
+		
 	}
 	
 	
@@ -134,7 +144,6 @@ public class Restaurante {
 	
 	private void cargarMenu(String rutaMenu) {
 		
-		// TODO: IMPLEMENTAR
 		/**
 		 * Leer el archivo de Productos Menu y obtener su informacion en una lista de objetos ProductoMenu
 		 * @param rutaArchivo
@@ -168,7 +177,6 @@ public class Restaurante {
 	
 	private void cargarCombos(String rutaCombos) {
 		
-		// TODO: IMPLEMENTAR
 		ArrayList<Combo> combos = new ArrayList<Combo>();
 		try
 		{
