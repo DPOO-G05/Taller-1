@@ -37,10 +37,11 @@ public class Aplicacion {
 			System.out.println("4: Agregar Combo");
 			System.out.println("5: Verificar Estado Pedido");
 			System.out.println("6: Terminar Pedido");
-			System.out.println("7: Salir");
+			System.out.println("7: Consultar Pedido Por ID");
+			System.out.println("8: Salir");
 			int opcionSeleccionada = Integer.parseInt(input("Ingrese la opción deseada"));
 			ejecutarOpcion(opcionSeleccionada);
-			if (opcionSeleccionada == 7) {
+			if (opcionSeleccionada == 8) {
 				continuar = false;
 			}
 		}
@@ -138,6 +139,15 @@ public class Aplicacion {
 		System.out.println(this.restaurante.cerrarYGuardarPedido());
 	}
 	
+
+	private void consultarPedidoID() {
+		int id = Integer.parseInt(input("Ingrese el ID del pedido que desea consultar"));
+		Pedido pedido = this.restaurante.consultarPedido(id);
+		System.out.println("El pedido consultado es el siguiente:");
+		System.out.println(pedido.guardarFactura());
+	}
+	
+	
 	
 	public void ejecutarOpcion(int opcionSeleccionada) {
 		// TODO: IMPLEMENTAR
@@ -172,6 +182,9 @@ public class Aplicacion {
 				cerrarYFacturar();
 				break;
 			case 7:
+				consultarPedidoID();
+				break;
+			case 8:
 				System.out.println("Gracias por tu compra!");
 				break;
 		}

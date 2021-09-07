@@ -32,6 +32,7 @@ public class Pedido {
 	
 	private String generarTextoFactura() {
 		String header = "**************";
+		header += String.format("\n\tID: %d\n",this.idPedido);
 		int IVA = getPrecioIVAPedido();
 		int neto = getPrecioNetoPedido();
 		int total = getPrecioTotalPedido();
